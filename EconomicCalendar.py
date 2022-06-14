@@ -43,7 +43,8 @@ def calendar(url):
         column = tr.find('td', {'class': 'flagCur'}) 
         #flag = column.find('span')
         #calendar.append(flag.get('title'))
-        calendar.append(column)
+        typ = column[-6:]
+        calendar.append(typ)
 
         impact = tr.find('td', {'class': 'sentiment'})
         bull = impact.findAll('i', {'class': 'grayFullBullishIcon'}) 
