@@ -32,7 +32,15 @@ for SMA_number in range(10,20):
     result = bt.run(above_sma(tickers, sma_per=SMA_number, name= SMA_name))
 
     result_df = result_df.append({'SMA':SMA_number,'CAGR':result.stats.at['cagr',SMA_name], 
-                                  'daily_sharpe': 
-result.stats.at['daily_sharpe',SMA_name]},ignore_index=True)
+                                  'daily_sharpe': result.stats.at['daily_sharpe',SMA_name]},ignore_index=True)
    
 result_df.set_index('SMA',inplace=True, drop=True)
+
+writer = pd.ExcelWriter('output.xlsx')
+# write dataframe to excel
+result_df.to_excel(writer)
+# save the excel
+writer.save()
+print('DataFrame is written successfully to Excel File.')
+
+print(result_df)

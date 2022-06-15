@@ -17,7 +17,7 @@ mom_s = bt.Strategy('mom_s', [bt.algos.RunMonthly(),
                               bt.algos.WeighEqually(),
                               bt.algos.Rebalance()],
                     ['spy', 'eem'])
-new_mom_s = bt.Strategy('z_mom_s', [bt.algos.RunMonthly(),
+extra_strategy = bt.Strategy('extra_strategy', [bt.algos.RunMonthly(),
                               bt.algos.SelectAll(),
                               bt.algos.SelectMomentum(1),
                               bt.algos.WeighEqually(),
@@ -30,7 +30,7 @@ master = bt.Strategy('master', [bt.algos.RunMonthly(),
                                 bt.algos.SelectAll(),
                                 bt.algos.WeighEqually(),
                                 bt.algos.Rebalance()],
-                    [mom_s,new_mom_s, 'agg'])
+                    [mom_s, extra_strategy, 'agg'])
 # create the backtest and run it
 test = bt.Backtest(master, data)
 # create results so we can display and plot
